@@ -1,0 +1,1 @@
+-- Write the SQL Query to know how many countries have Spanish as their official language. Good luck!
