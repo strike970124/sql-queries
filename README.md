@@ -1,7 +1,7 @@
 ![Aloha Project Logo](https://raw.githubusercontent.com/estradav/aloha/master/images/AP_horizontal.png)
 ***
 
-# SQL Querys
+# SQL Queries
 
 Oh... Hello applicant, see you again! does it look like it's time to start playing with data?
 
