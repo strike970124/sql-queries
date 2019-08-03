@@ -1,0 +1,48 @@
+version: "3.2"
+services:
+  db:
+    image: mysql:5.7
+    container_name: db_mo
+    env_file: .env
+    # Win7 64Bits
+    #command: --innodb_use_native_aio=0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    # win10
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - network_mo
+    healthcheck:
+      test: ["CMD", "mysqladmin ", "ping", "--silent"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_mo
+    env_file: .env
+    # links:
+    #   - db:mysql
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    networks:
+      - network_mo
+  ui:
+    image: portainer/portainer
+    container_name: portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - network_mo       
+networks:
+  network_mo:
+    driver: bridge
+volumes:
+  portainer_data:
